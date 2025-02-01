@@ -85,13 +85,13 @@
   <tendon>
     <spatial name="HF" width="0.01">
       <site site="s1"/>
-      <geom geom="hip" sidesite="x2"/>
+      <geom geom="hip" sidesite="x0"/>
       <site site="s3"/>
     </spatial>
 
     <spatial name="HE" width="0.01">
       <site site="s0"/>
-      <geom geom="hip" sidesite="x0"/>
+      <geom geom="hip" sidesite="x2"/>
       <site site="s2"/>
     </spatial>
 
@@ -123,6 +123,13 @@
       <site site="s9"/>
     </spatial> -->
   </tendon>
+
+  <sensor>
+    <tendonpos name="HF"  tendon="HF"/>
+    <tendonpos name="HE"  tendon="HE"/>
+    <tendonpos name="KF"  tendon="KF"/>
+    <tendonpos name="KE"  tendon="KE"/>
+  </sensor>
 
   <actuator>
     <!-- <general name="actuator_hip" joint="hip" gainprm="1500" biasprm="0 -1500 -150"/>
