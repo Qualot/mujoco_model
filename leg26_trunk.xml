@@ -107,7 +107,7 @@
       <site site="s9"/>
     </spatial>
 
-    <spatial name="BF" width="0.009" rgba=".4 .6 .4 1">
+    <!-- <spatial name="BF" width="0.009" rgba=".4 .6 .4 1">
       <site site="s0"/>
       <geom geom="hip" sidesite="x2"/>
       <site site="s6"/>
@@ -121,14 +121,17 @@
       <site site="s7"/>
       <geom geom="knee" sidesite="x1"/>
       <site site="s9"/>
-    </spatial>
+    </spatial> -->
   </tendon>
 
   <actuator>
-    <general name="actuator_hip" joint="hip" gainprm="1500" biasprm="0 -1500 -150"/>
-    <general name="actuator_knee" joint="knee" gainprm="1500" biasprm="0 -1500 -150" ctrlrange="0 2.4" />
+    <!-- <general name="actuator_hip" joint="hip" gainprm="1500" biasprm="0 -1500 -150"/>
+    <general name="actuator_knee" joint="knee" gainprm="1500" biasprm="0 -1500 -150" ctrlrange="0 2.4" /> -->
+    <!-- torque -->
+    <motor name="actuator_hip" joint="hip"  gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+    <motor name="actuator_knee" joint="knee"  gear="1" ctrllimited="true" ctrlrange="-100 100"/>
   </actuator>
-  <!-- <keyframe>
-    <key name="home" qpos="-0.7853 0.7853 0 0 0" ctrl="-0.7853 0.7853"/>
-  </keyframe> -->
+  <keyframe>
+    <key name="initial" qpos="0 -0.7853 1.5708" ctrl="-0.7853 1.5708"/>
+  </keyframe>
 </mujoco>
