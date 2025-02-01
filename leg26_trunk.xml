@@ -22,7 +22,7 @@
   </visual>
 
   <default>
-    <joint type="hinge" pos="0 0 0" axis="0 1 0" limited="true" range="-1.047 1.047" damping="0.1"/>
+    <joint type="hinge" pos="0 0 0" axis="0 -1 0" limited="true" range="-1.047 1.047" damping="0.1"/>
     <general dyntype="none" biastype="affine" ctrlrange="-1.047 1.047" forcerange="-87 87"/>
   </default>
 
@@ -72,7 +72,7 @@
           <inertial mass="0.6" pos="0 0 -0.25"
             diaginertia="0.004503 0.004503 0.000067036"/>
           <geom name="lower_leg" type="capsule" size="0.035" fromto="0 0 0  0 0 -0.5" rgba=".5 .1 .1 1"/>
-          <joint name="knee" range="0 2.4"/>
+          <joint name="knee" range="-2.4 0"/>
           <geom name="knee" type="cylinder" pos="0 0 0" size=".08 .05" quat="0.7071068 0.7071068 0 0" rgba=".5 .1 .8 .5" mass="0" group="1"/>
 
           <site name="s8" pos="-0.05 0 -0.11" size="0.02"/>
