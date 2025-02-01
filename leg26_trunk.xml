@@ -139,6 +139,6 @@
     <motor name="actuator_knee" joint="knee"  gear="1" ctrllimited="true" ctrlrange="-100 100"/>
   </actuator>
   <keyframe>
-    <key name="initial" qpos="0 -0.7853 1.5708" ctrl="-0.7853 1.5708"/>
+    <key name="initial" qpos="0 0.7853 -1.5708" ctrl="0.0 0.0"/>
   </keyframe>
 </mujoco>
