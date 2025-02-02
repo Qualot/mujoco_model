@@ -48,8 +48,8 @@
       <geom name="trunk" type="capsule" size="0.045" fromto="-0.5 0 0  0.5 0 0" rgba=".5 .1 .1 1"/>
       <site name="s0" pos="-0.15 0 0" size="0.02"/>
       <site name="s1" pos=" 0.15 0 0" size="0.02"/>
-      <site name="x0" pos=" 0.15 0 0" size="0.02" rgba="0 .7 0 1" group="1"/>
-      <site name="x2" pos="-0.15 0 0" size="0.02" rgba="0 .7 0 1" group="1"/>
+      <site name="x1" pos=" 0.15 0 0" size="0.02" rgba="0 .7 0 1" group="1"/>
+      <site name="x0" pos="-0.15 0 0" size="0.02" rgba="0 .7 0 1" group="1"/>
 
       <body pos="0 0 0">
         <inertial mass="0.6" pos="0 0 -0.25"
@@ -65,8 +65,8 @@
         <site name="s5" pos=" 0.06 0 -0.4" size="0.02"/>
         <site name="s6" pos="-0.1 0 -0.25" size="0.02"/>
         <site name="s7" pos=" 0.1 0 -0.25" size="0.02"/>
-        <site name="x1" pos=" 0.15 0 -0.5" size="0.02" rgba="0 .7 0 1" group="1"/>
-        <site name="x3" pos="-0.15 0 -0.5" size="0.02" rgba="0 .7 0 1" group="1"/>
+        <site name="x3" pos=" 0.15 0 -0.5" size="0.02" rgba="0 .7 0 1" group="1"/>
+        <site name="x2" pos="-0.15 0 -0.5" size="0.02" rgba="0 .7 0 1" group="1"/>
 
         <body pos="0 0 -0.5">
           <inertial mass="0.6" pos="0 0 -0.25"
@@ -85,41 +85,41 @@
   <tendon>
     <spatial name="HF" width="0.01">
       <site site="s1"/>
-      <geom geom="hip" sidesite="x0"/>
+      <geom geom="hip" sidesite="x1"/>
       <site site="s3"/>
     </spatial>
 
     <spatial name="HE" width="0.01">
       <site site="s0"/>
-      <geom geom="hip" sidesite="x2"/>
+      <geom geom="hip" sidesite="x0"/>
       <site site="s2"/>
     </spatial>
 
     <spatial name="KF" width="0.01">
       <site site="s4"/>
-      <geom geom="knee" sidesite="x3"/>
+      <geom geom="knee" sidesite="x2"/>
       <site site="s8"/>
     </spatial>
 
     <spatial name="KE" width="0.01">
       <site site="s5"/>
-      <geom geom="knee" sidesite="x1"/>
+      <geom geom="knee" sidesite="x3"/>
       <site site="s9"/>
     </spatial>
 
     <!-- <spatial name="BF" width="0.009" rgba=".4 .6 .4 1">
       <site site="s0"/>
-      <geom geom="hip" sidesite="x2"/>
+      <geom geom="hip" sidesite="x0"/>
       <site site="s6"/>
-      <geom geom="knee" sidesite="x3"/>
+      <geom geom="knee" sidesite="x2"/>
       <site site="s8"/>
     </spatial>
 
     <spatial name="BE" width="0.009" rgba=".4 .6 .4 1">
       <site site="s1"/>
-      <geom geom="hip" sidesite="x0"/>
+      <geom geom="hip" sidesite="x1"/>
       <site site="s7"/>
-      <geom geom="knee" sidesite="x1"/>
+      <geom geom="knee" sidesite="x3"/>
       <site site="s9"/>
     </spatial> -->
   </tendon>
