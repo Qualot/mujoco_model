@@ -1,0 +1,176 @@
+<!-- Copyright 2021 DeepMind Technologies Limited
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<mujoco model="3-link 6-muscle leg">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <option timestep="0.005" iterations="50" solver="Newton" tolerance="1e-10"/>
+
+  <visual>
+    <rgba haze=".3 .3 .3 1"/>
+  </visual>
+
+  <default>
+    <joint type="hinge" pos="0 0 0" axis="0 -1 0" limited="true" range="-1.047 1.047" damping="0.1"/>
+    <general dyntype="none" biastype="affine" ctrlrange="-1.047 1.047" forcerange="-87 87"/>
+  </default>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.6 0.6 0.6" rgb2="0 0 0" width="512" height="512"/>
+    <texture name="texplane" type="2d" builtin="checker" rgb1=".25 .25 .25" rgb2=".3 .3 .3" width="512" height="512" mark="cross" markrgb=".8 .8 .8"/>
+    <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
+  </asset>
+
+  <worldbody>
+    <geom name="floor" pos="0 0 -1.5" size="0 0 1" type="plane" material="matplane"/>
+
+    <light directional="true" diffuse=".8 .8 .8" specular=".2 .2 .2" pos="0 0 5" dir="0 0 -1"/>
+
+    <body pos="0 0 0">
+      <!-- <freejoint /> -->
+      <!-- <joint name="world_joint_TX" pos="0 0 0" axis="1 0 0" type="slide"/> -->
+      <joint name="world_joint_TY" pos="0 0 0" axis="0 0 -1" type="slide"/>
+      <!-- <joint name="world_joint_RZ" pos="0 0 0" axis="0 1 0"/> -->
+      <inertial mass="8" pos="0 0 0"
+        diaginertia="0.003575 0.6639 0.6639"/>
+      <!-- <geom name="trunk" type="box" size="1 .2 .3" rgba=".5 .1 .1 1"/> -->
+      <geom name="trunk" type="capsule" size="0.045" fromto="-0.5 0 0  0.5 0 0" rgba=".5 .1 .1 1"/>
+      <site name="s0" pos="-0.15 0 0" size="0.02"/>
+      <site name="s1" pos=" 0.15 0 0" size="0.02"/>
+      <site name="x1" pos=" 0.15 0 0" size="0.02" rgba="0 .7 0 1" group="1"/>
+      <site name="x0" pos="-0.15 0 0" size="0.02" rgba="0 .7 0 1" group="1"/>
+
+      <body pos="0 0 0">
+        <inertial mass="0.6" pos="0 0 -0.25"
+          diaginertia="0.004503 0.004503 0.000067036"/>
+        <geom name="upper_leg" type="capsule" size="0.045" fromto="0 0 0  0 0 -0.5" rgba=".5 .1 .1 1"/>
+        <joint name="hip"/>
+        <geom name="hip" type="cylinder" pos="0 0 0" size=".1 .05" quat="0.7071068 0.7071068 0 0" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+
+
+        <site name="s2" pos="-0.06 0 -0.15" size="0.02"/>
+        <site name="s3" pos=" 0.06 0 -0.15" size="0.02"/>
+        <site name="s4" pos="-0.06 0 -0.4" size="0.02"/>
+        <site name="s5" pos=" 0.06 0 -0.4" size="0.02"/>
+        <site name="s6" pos="-0.1 0 -0.25" size="0.02"/>
+        <site name="s7" pos=" 0.1 0 -0.25" size="0.02"/>
+        <site name="x3" pos=" 0.15 0 -0.5" size="0.02" rgba="0 .7 0 1" group="1"/>
+        <site name="x2" pos="-0.15 0 -0.5" size="0.02" rgba="0 .7 0 1" group="1"/>
+
+        <body pos="0 0 -0.5">
+          <inertial mass="0.6" pos="0 0 -0.25"
+            diaginertia="0.004503 0.004503 0.000067036"/>
+          <geom name="lower_leg" type="capsule" size="0.035" fromto="0 0 0  0 0 -0.5" rgba=".5 .1 .1 1"/>
+          <joint name="knee" range="-2.4 0"/>
+          <geom name="knee" type="cylinder" pos="0 0 0" size=".08 .05" quat="0.7071068 0.7071068 0 0" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+
+          <site name="s8" pos="-0.05 0 -0.11" size="0.02"/>
+          <site name="s9" pos=" 0.05 0 -0.11" size="0.02"/>
+          <site name="s10" pos="-0.05 0 -0.4" size="0.02"/>
+          <site name="s11" pos=" 0.05 0 -0.4" size="0.02"/>
+          <site name="s12" pos="-0.1 0 -0.25" size="0.02"/>
+          <site name="s13" pos=" 0.1 0 -0.25" size="0.02"/>
+          
+          <body pos="0 0 -0.5">
+            <inertial mass="0.5" pos="0.125 0 0"
+            diaginertia="0.00002207 0.009207 0.009207"/>
+            <geom name="foot" type="capsule" size="0.035" fromto="0 0 0  0.25 0 0" rgba=".5 .1 .1 1"/>
+            <joint name="ankle" range="-1.5 1.2"/>
+            <geom name="ankle" type="cylinder" pos="0 0 0" size=".08 .05" quat="0.7071068 0.7071068 0 0" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="toe" type="cylinder" pos="0.25 0 0" size=".08 .05" quat="0.7071068 0.7071068 0 0" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <site name="s14" pos=" 0.125 0 -0.05" size="0.02"/>
+            <site name="s15" pos=" 0.125 0  0.05" size="0.02"/>
+            <site name="x4" pos="-0.15 0 0" size="0.02" rgba="0 .7 0 1" group="1"/>
+            <site name="x5" pos=" 0.15 0 0" size="0.02" rgba="0 .7 0 1" group="1"/>
+            </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <tendon>
+    <spatial name="HF" width="0.01">
+      <site site="s1"/>
+      <geom geom="hip" sidesite="x1"/>
+      <site site="s3"/>
+    </spatial>
+
+    <spatial name="HE" width="0.01">
+      <site site="s0"/>
+      <geom geom="hip" sidesite="x0"/>
+      <site site="s2"/>
+    </spatial>
+
+    <spatial name="KF" width="0.01">
+      <site site="s4"/>
+      <geom geom="knee" sidesite="x2"/>
+      <site site="s8"/>
+    </spatial>
+
+    <spatial name="KE" width="0.01">
+      <site site="s5"/>
+      <geom geom="knee" sidesite="x3"/>
+      <site site="s9"/>
+    </spatial>
+
+    <spatial name="AF" width="0.01">
+      <site site="s11"/>
+      <geom geom="ankle" sidesite="x5"/>
+      <site site="s15"/>
+    </spatial>
+
+    <spatial name="AE" width="0.01">
+      <site site="s10"/>
+      <geom geom="ankle" sidesite="x4"/>
+      <site site="s14"/>
+    </spatial>
+
+    <!-- <spatial name="BF" width="0.009" rgba=".4 .6 .4 1">
+      <site site="s0"/>
+      <geom geom="hip" sidesite="x0"/>
+      <site site="s6"/>
+      <geom geom="knee" sidesite="x2"/>
+      <site site="s8"/>
+    </spatial>
+
+    <spatial name="BE" width="0.009" rgba=".4 .6 .4 1">
+      <site site="s1"/>
+      <geom geom="hip" sidesite="x1"/>
+      <site site="s7"/>
+      <geom geom="knee" sidesite="x3"/>
+      <site site="s9"/>
+    </spatial> -->
+  </tendon>
+
+  <sensor>
+    <tendonpos name="HF"  tendon="HF"/>
+    <tendonpos name="HE"  tendon="HE"/>
+    <tendonpos name="KF"  tendon="KF"/>
+    <tendonpos name="KE"  tendon="KE"/>
+    <tendonpos name="AF"  tendon="AF"/>
+    <tendonpos name="AE"  tendon="AE"/>
+  </sensor>
+
+  <actuator>
+    <!-- <general name="actuator_hip" joint="hip" gainprm="1500" biasprm="0 -1500 -150"/>
+    <general name="actuator_knee" joint="knee" gainprm="1500" biasprm="0 -1500 -150" ctrlrange="0 2.4" /> -->
+    <!-- torque -->
+    <motor name="actuator_hip" joint="hip"  gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+    <motor name="actuator_knee" joint="knee"  gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+    <motor name="actuator_ankle" joint="ankle"  gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+  </actuator>
+  <keyframe>
+    <key name="initial" qpos="0 0.7853 -1.5708 2.3561" ctrl="0.0 0.0 0.0"/>
+  </keyframe>
+</mujoco>
